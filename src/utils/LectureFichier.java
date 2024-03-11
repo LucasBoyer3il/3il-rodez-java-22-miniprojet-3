@@ -9,11 +9,10 @@ import java.util.Map;
 
 public class LectureFichier {
 
-    private static Map<Integer, Map<String, String>> mots;
-    private static Map<String, String> definitions;
+    private static Map<Integer, String> mots = new HashMap<>();
+    private static Map<String, String> definitions = new HashMap<>();
+
     public static Map<Integer , String> lireLignes(Path fichier) {
-        Map<Integer , String> mots = new HashMap<>();
-        Map<String, String> definitions = new HashMap<>();
         try (BufferedReader bufferedReader = Files.newBufferedReader(fichier)) {
             String lectureLigne = bufferedReader.readLine();
             Integer numeroLigne = 0;
@@ -32,11 +31,11 @@ public class LectureFichier {
         return mots;
     }
 
-    public static String geDefinition(Integer numeroligne) {
+    public static String getDefinition(Integer numeroligne) {
         return definitions.get(mots.get(numeroligne));
     }
 
-    public static String geDefinition(String mot) {
+    public static String getDefinition(String mot) {
         return definitions.get(mot);
 
     }
