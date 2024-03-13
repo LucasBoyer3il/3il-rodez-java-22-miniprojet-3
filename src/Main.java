@@ -18,6 +18,5 @@ public class Main {
         ModelePendu modelePendu = new ModelePendu(motAleatoire);
         VuePendu vuePendu = new VuePendu(modelePendu);
         ControllerPendu controllerPendu = new ControllerPendu(modelePendu, vuePendu);
-
     }
 }

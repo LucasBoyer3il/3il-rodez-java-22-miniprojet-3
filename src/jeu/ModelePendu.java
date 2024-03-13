@@ -12,6 +12,11 @@ public class ModelePendu {
 
     private StringBuilder lettreEntree;
 
+    /**
+     * Le constructeur doit initier le motAffiche qui doit avoir un nombre de "_ " égal au nombre de lettre du
+     * mot entré en paramètre lors de la création du constructeur.
+     * @param motSecret mot à faire deviner qui a été généré aléatoirement
+     */
     public ModelePendu(String motSecret) {
         this.lettreEntree = new StringBuilder();
         this.motSecret = motSecret;
@@ -46,7 +51,12 @@ public class ModelePendu {
         this.lettreEntree.append(lettreEntree + " ");
     }
 
-    public boolean guessLetter(char letter) {
+    /**
+     *
+     * @param letter lettre entré par l'utilisateur pour trouver si elle se trouve dans le mot à deviner ou non
+     * @return true si la lettre se trouve dans le mot à faire deviner
+     */
+    public boolean devinerLetter(char letter) {
         boolean trouve = false;
         for (int i = 0; i < motSecret.length(); i++) {
             if (motSecret.charAt(i) == letter) {
@@ -64,6 +74,10 @@ public class ModelePendu {
         return motAffiche.toString().replace(" ", "").equals(motSecret);
     }
 
+    /**
+     * Affiche la définition du mot à deviner si le texte est à blanc ou met le texte à blanc si la définition est affiché
+     * @param definitionTextArea
+     */
     public void afficherDefinition(JTextArea definitionTextArea) {
         if (definitionTextArea.getText().isBlank()) {
             definitionTextArea.setText(LectureFichier.getDefinition(motSecret));

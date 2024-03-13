@@ -1,15 +1,14 @@
 package jeu;
 
-import utils.LectureFichier;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
 
-public class VuePendu {
+public class VuePendu extends JFrame {
     private ModelePendu model;
+
+    private JFrame fenetre;
     private JLabel motLabel;
     private JLabel essaisLabel;
 
@@ -28,10 +27,10 @@ public class VuePendu {
     public VuePendu(ModelePendu model) {
         this.model = model;
 
-        JFrame fenetre = new JFrame("Jeu du Pendu");
+        fenetre = new JFrame("Jeu du Pendu");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(1920, 500);
-        //fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //fenetre.setExtendedState(JFrame.MAXIMIZED_BOTH); //Mettre le jeu en plein écran au lancement
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -61,34 +60,6 @@ public class VuePendu {
                 fenetre.repaint();
             }
         });
-        entreeJoueur.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String entree = entreeJoueur.getText();
-                if (entree.length() == 1 && Character.isLetter(entree.charAt(0))) {
-                    char letter = entree.charAt(0);
-                    boolean trouve = model.guessLetter(letter);
-                    if(!trouve) {
-                        model.setLettreEntree(letter);
-                    }
-                    if (!trouve && model.getNbEssaisRestants() == 0) {
-                        afficherMessageFin("Perdu ! Le mot était : " + model.getMotSecret());
-                        System.exit(0);
-                    }
-                    updateVue();
-                    if (model.isMotDevine()) {
-                        afficherMessageFin("Bravo ! Vous avez deviné le mot : " + model.getMotSecret());
-                        fenetre.getContentPane().removeAll();
-                        fenetre.getContentPane().revalidate();
-                        JPanel panelRejouer = new JPanel();
-                        panelRejouer.add(boutonRejouer);
-                        fenetre.add(panelRejouer);
-                        fenetre.repaint();
-                    }
-                    entreeJoueur.setText("");
-                }
-            }
-        });
 
         panel.add(motLabel);
         panel.add(essaisLabel);
@@ -102,14 +73,22 @@ public class VuePendu {
         fenetre.setVisible(true);
     }
 
+    public JTextField getEntreeJoueur() {
+        return entreeJoueur;
+    }
+
+    public JButton getBoutonRejouer() {
+        return boutonRejouer;
+    }
+
+    public JFrame getFenetre() {
+        return fenetre;
+    }
+
     public void updateVue() {
         motLabel.setText(model.getMotAffiche());
         essaisLabel.setText("Essais restants : " + model.getNbEssaisRestants());
         lettreDevinees.setText("Lettres proposées : " + model.getLettreEntree());
-    }
-
-    public JLabel getMotLabel() {
-        return motLabel;
     }
 
     public void afficherMessageFin(String message) {
