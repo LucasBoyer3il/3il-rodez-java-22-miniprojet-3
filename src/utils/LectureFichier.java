@@ -31,10 +31,6 @@ public class LectureFichier {
         return mots;
     }
 
-    public static String getDefinition(Integer numeroligne) {
-        return definitions.get(mots.get(numeroligne));
-    }
-
     public static String getDefinition(String mot) {
         return definitions.get(mot);
 

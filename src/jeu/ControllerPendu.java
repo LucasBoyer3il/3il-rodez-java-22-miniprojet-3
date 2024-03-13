@@ -1,17 +1,14 @@
 package jeu;
 
-import javax.swing.*;
 
 public class ControllerPendu {
+    private ModelePendu modele;
+    private VuePendu vue;
 
-    VuePendu vuePendu;
-
-    ModelePendu modelePendu;
-    JButton bouton;
-
-    public ControllerPendu(ModelePendu modelePendu, VuePendu vuePendu) {
-        this.modelePendu = modelePendu;
-        this.vuePendu = vuePendu;
-
+    public ControllerPendu(ModelePendu modele, VuePendu vue) {
+        this.modele = modele;
+        this.vue = vue;
+        vue.updateVue();
     }
 }
+

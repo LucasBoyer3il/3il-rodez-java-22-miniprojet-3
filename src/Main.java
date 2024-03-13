@@ -13,11 +13,10 @@ public class Main {
         int nombreAleatoire = Aleatoire.genererAleatoire(0, mots.size());
         String motAleatoire = mots.get(nombreAleatoire);
         System.out.println("mot aléatoire : " + motAleatoire);
-        System.out.println("Définition : " + LectureFichier.getDefinition(nombreAleatoire));
-        System.out.println("Définition : " + LectureFichier.getDefinition(mots.get(nombreAleatoire)));
+        System.out.println("Définition : " + LectureFichier.getDefinition(motAleatoire));
 
-        ModelePendu modelePendu = new ModelePendu();
-        VuePendu vuePendu = new VuePendu(motAleatoire);
+        ModelePendu modelePendu = new ModelePendu(motAleatoire);
+        VuePendu vuePendu = new VuePendu(modelePendu);
         ControllerPendu controllerPendu = new ControllerPendu(modelePendu, vuePendu);
 
     }
